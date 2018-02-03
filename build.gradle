@@ -1,7 +1,20 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 version '1.0-SNAPSHOT'
+
+ext {
+    drivers = ['chrome']
+    groovyVersion = '2.4'
+    gebVersion = '2.0'
+    seleniumVersion = '3.8.1'
+    chromeDriverVersion = '2.35'
+    spockVersion = '1.1-groovy-2.4'
+    baseUrl = 'https://www.esky.pl'
+}
 
 apply plugin: 'groovy'
 apply plugin: 'java'
+apply from: "gradle/osSpecificDownloads.gradle"
 
 sourceCompatibility = 1.8
 
@@ -10,6 +23,43 @@ repositories {
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.github.javafaker', name: 'javafaker', version: '0.14'
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: groovyVersion
+    compile group: 'org.gebish', name: 'geb-core', version: gebVersion
+    compile group: 'org.gebish', name: 'geb-spock', version: gebVersion
+    compile group: 'org.spockframework', name: 'spock-core', version: spockVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: seleniumVersion
+    compile group: 'junit', name: 'junit', version: '4.12'
+}
+
+//Method which print message with test result after test
+ext.printingTestResult = {desc, result->
+    println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+}
+
+task chromeTest(type: Test) {
+    systemProperty "geb.env", "chrome"
+    dependsOn unzipChromeDriver
+
+    def chromedriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "chromedriver.exe" : "chromedriver"
+    systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, chromedriverFilename).absolutePath
+    systemProperty "geb.build.baseUrl", baseUrl
+
+    afterTest { desc, result ->
+        printingTestResult(desc, result)
+    }
+    reports {
+        junitXml.enabled = true
+        html.enabled = true
+    }
+}
+
+test {
+    dependsOn drivers.collect { tasks["${it}Test"] }
+    ignoreFailures Boolean.getBoolean("test.ignoreFailures")
+    enabled = false
+    reports {
+        junitXml.enabled = true
+        html.enabled = true
+    }
 }
