@@ -28,4 +28,9 @@ class LoginViewPage extends MainPage {
         fillForm(email, password)
         userZoneModule.form.confirmButton.click()
     }
+
+    void fillFormAndClickLogInButton(email, password){
+        fillFormAndLogIn(email, password)
+        loader.waitForLoggedOn()
+    }
 }

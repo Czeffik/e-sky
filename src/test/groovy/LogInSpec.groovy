@@ -4,10 +4,9 @@ import dataProviders.UserDataProvider
 import dataProviders.ValidationMessages
 import geb.spock.GebReportingSpec
 import jodd.util.RandomString
-import pages.loginAndCreatingAccount.FacebookLoginPage
-
-import pages.loginAndCreatingAccount.LoginViewPage
 import pages.MainPage
+import pages.loginAndCreatingAccount.FacebookLoginPage
+import pages.loginAndCreatingAccount.LoginViewPage
 import spock.lang.Shared
 import spock.lang.Unroll
 
@@ -30,7 +29,7 @@ class LogInSpec extends GebReportingSpec {
     @Unroll
     def 'Should not be possible to log on with email: #email and password: #password because: #validationMessage #secondValidationMessage'() {
         when:
-        fillFormAndLogIn(email, password)
+        fillFormAndClickLogInButton(email, password)
 
         then:
         at LoginViewPage
