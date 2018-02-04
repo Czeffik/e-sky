@@ -13,10 +13,10 @@ class SearchHotelsSpec extends GebReportingSpec {
         selectSearchCategory('hotels')
         fillHotelFields(city, 2018, 3, 5, 2018, 4, 15)
         hotelSearchFields.searchButton.click()
-        loader.waitForLoaded()
+        loader.waitForSearchResults()
 
         then:
         at SearchResultPage
-        breadcrumbList.findAll{it.propertyName.text().contains(city)}.size()>0
+        breadcrumbList.findAll { it.propertyName.text().contains(city) }.size() > 0
     }
 }

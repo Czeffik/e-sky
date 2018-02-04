@@ -15,7 +15,7 @@ class FacebookLoginPage extends Page {
         confirmButton { $('#loginbutton') }
     }
 
-    void fillFormAndLogIn(email, password){
+    void fillFormAndLogIn(email, password) {
         emailField = email
         passwordField = password
         confirmButton.click()

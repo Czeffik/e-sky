@@ -1,13 +1,11 @@
 package pages
 
-import geb.Page
-
-class LoggedPage extends Page{
-    static url = ''
+class LoggedPage extends MainPage {
     static at = {
-
+        headerWrapper.headerSideOptions.signedIn.displayed
     }
-    static content = {
 
+    void openUserMenu() {
+        headerWrapper.headerSideOptions.click()
     }
 }

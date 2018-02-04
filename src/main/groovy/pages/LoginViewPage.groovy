@@ -1,9 +1,8 @@
 package pages
 
-import geb.Page
 import modules.userZone.LoginModule
 
-class LoginViewPage extends Page {
+class LoginViewPage extends MainPage {
     static at = {
         userZoneModule.facebookButton.displayed
         userZoneModule.form.confirmButton.displayed
@@ -15,17 +14,18 @@ class LoginViewPage extends Page {
         userZoneModule { module LoginModule }
     }
 
-    void loginViaFacebookButton(){
+    void loginViaFacebookButton() {
         userZoneModule.facebookButton.click()
     }
 
-    void fillForm(email, password){
+    void fillForm(email, password) {
         userZoneModule.form.emailField = email
         userZoneModule.form.passwordField = password
     }
 
-    void fillFormAndLogIn(email, password){
+    void fillFormAndLogIn(email, password) {
         fillForm(email, password)
         userZoneModule.form.confirmButton.click()
+        loader.waitForLoggedOn()
     }
 }

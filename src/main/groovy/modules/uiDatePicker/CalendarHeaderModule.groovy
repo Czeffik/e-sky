@@ -2,8 +2,8 @@ package modules.uiDatePicker
 
 import geb.Module
 
-class CalendarHeader extends Module{
+class CalendarHeaderModule extends Module {
     static content = {
-        day {$('th')}
+        day { $('th') }
     }
 }

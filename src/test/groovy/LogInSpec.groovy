@@ -5,6 +5,7 @@ import dataProviders.ValidationMessages
 import geb.spock.GebReportingSpec
 import jodd.util.RandomString
 import pages.FacebookLoginPage
+import pages.LoggedPage
 import pages.LoginViewPage
 import pages.MainPage
 import spock.lang.Shared
@@ -27,7 +28,7 @@ class LogInSpec extends GebReportingSpec {
     }
 
     @Unroll
-    def "Shouldn't be possible to log on because: #validationError #secondValidationMessage"() {
+    def 'Should not be possible to log on with email: #email and password: #password because: #validationMessage #secondValidationMessage'() {
         when:
         fillFormAndLogIn(email, password)
 
@@ -39,17 +40,18 @@ class LogInSpec extends GebReportingSpec {
         }
 
         where:
-        email                                                                         || password         || validationMessage          || secondValidationMessage
-        faker.emailAddress()                                                          || faker.password() || msg.invalidEmailOrPassword || ''
-        faker.emailAddress()                                                          || ''               || msg.emptyPassword          || ''
-        ''                                                                            || faker.password() || msg.emptyEmail             || ''
-        ''                                                                            || ''               || msg.emptyPassword          || msg.emptyEmail
-        random.randomAlpha(1)                                                         || faker.password() || msg.invalidEmailAddress    || ''
-        random.randomAlpha(24)                                                        || faker.password() || msg.invalidEmailAddress    || ''
-        random.randomAlpha(10) + '@'                                                  || faker.password() || msg.invalidEmailAddress    || ''
-        random.randomAlpha(10) + "@${random.randomAlpha(5)}"                          || faker.password() || msg.invalidEmailAddress    || ''
-        random.randomAlpha(10) + "@${random.randomAlpha(5)}."                         || faker.password() || msg.invalidEmailAddress    || ''
-        random.randomAlpha(10) + "@${random.randomAlpha(5)}.${random.randomAlpha(5)}" || faker.password() || msg.invalidEmailAddress    || ''
+        email                                                 || password         || validationMessage          || secondValidationMessage
+        faker.emailAddress()                                  || faker.password() || msg.invalidEmailOrPassword || ''
+        faker.emailAddress()                                  || ''               || msg.emptyPassword          || ''
+        ''                                                    || faker.password() || msg.emptyEmail             || ''
+        ''                                                    || ''               || msg.emptyPassword          || msg.emptyEmail
+        random.randomAlpha(1)                                 || faker.password() || msg.invalidEmailAddress    || ''
+        random.randomAlpha(24)                                || faker.password() || msg.invalidEmailAddress    || ''
+        random.randomAlpha(10) + '@'                          || faker.password() || msg.invalidEmailAddress    || ''
+        "@${random.randomAlpha(5)}"                           || faker.password() || msg.invalidEmailAddress    || ''
+        "@${random.randomAlpha(5)}.${random.randomAlpha(5)}"  || faker.password() || msg.invalidEmailAddress    || ''
+        random.randomAlpha(10) + "@${random.randomAlpha(5)}"  || faker.password() || msg.invalidEmailAddress    || ''
+        random.randomAlpha(10) + "@${random.randomAlpha(5)}." || faker.password() || msg.invalidEmailAddress    || ''
     }
 
     def 'Should logged on'() {
@@ -57,13 +59,7 @@ class LogInSpec extends GebReportingSpec {
         fillFormAndLogIn(user.email, user.password)
 
         then:
-        at MainPage
-
-        when:
-        toLoginView()
-
-        then:
-        headerWrapper.headerSideOptions.signedIn.displayed
+        at LoggedPage
     }
 
     def 'Should logged on via facebook button'() {
@@ -88,12 +84,6 @@ class LogInSpec extends GebReportingSpec {
         driver.switchTo().window(winHandleBefore)
 
         then:
-        at MainPage
-
-        when:
-        openUserMenu()
-
-        then:
-        headerWrapper.headerSideOptions.loggedUserMenu.size() > 0
+        at LoggedPage
     }
 }

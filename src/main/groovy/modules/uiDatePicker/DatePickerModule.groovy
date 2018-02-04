@@ -5,8 +5,8 @@ import geb.Module
 class DatePickerModule extends Module {
     static base = { $('.ui-datepicker') }
     static content = {
-        uiDatePickerHeader { module DatePickerHeader }
-        uiDatePickerCalendar { module UiDatePickerCalendar }
+        uiDatePickerHeader { module DatePickerHeaderModule }
+        uiDatePickerCalendar { module UiDatePickerCalendarModule }
     }
 
     int getCurrentYear() {

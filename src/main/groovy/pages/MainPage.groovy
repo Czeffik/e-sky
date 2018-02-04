@@ -2,9 +2,9 @@ package pages
 
 import dataProviders.ImagePathsProvider
 import geb.Page
+import modules.LoaderModule
 import modules.headerWrapper.HeaderWrapperModule
 import modules.searchModules.HotelsSearchModule
-import modules.Loader
 import modules.searchModules.SearchCategoryModule
 import modules.uiDatePicker.DatePickerModule
 
@@ -12,11 +12,11 @@ class MainPage extends Page {
     static url = ''
     static at = { headerWrapper.logo.logoImg.getAttribute('src') == ImagePathsProvider.logoImage }
     static content = {
-        headerWrapper { module HeaderWrapperModule}
+        headerWrapper { module HeaderWrapperModule }
         searchCategory { module SearchCategoryModule }
         hotelSearchFields { module HotelsSearchModule }
         calendarModule { module DatePickerModule }
-        loader { module Loader }
+        loader { module LoaderModule }
     }
 
     void selectSearchCategory(String category) {
@@ -41,11 +41,7 @@ class MainPage extends Page {
         calendarModule.selectDate(checkInYear, checkInMonth, checkInDay)
     }
 
-    void toLoginView(){
+    void toLoginView() {
         headerWrapper.headerSideOptions.userZoneMenuSection.click()
-    }
-
-    void openUserMenu(){
-        headerWrapper.headerSideOptions.signedIn.click()
     }
 }

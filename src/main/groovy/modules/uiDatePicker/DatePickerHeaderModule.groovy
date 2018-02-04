@@ -2,7 +2,7 @@ package modules.uiDatePicker
 
 import geb.Module
 
-class DatePickerHeader extends Module{
+class DatePickerHeaderModule extends Module{
     static base = {$('.ui-datepicker-header')}
     static content = {
         previousButton {$'.ui-datepicker-prev'}

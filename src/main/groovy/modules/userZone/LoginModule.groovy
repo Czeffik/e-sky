@@ -8,7 +8,7 @@ class LoginModule extends Module {
         closeButton { $('.custom-dialog-close') }
         facebookButton { $('.login-facebook') }
         form { module LoginFormModule }
-        remindPassword {$('.remind-password')}
-        signUpButton {$('.sign-up-info .btn')}
+        remindPassword { $('.remind-password') }
+        signUpButton { $('.sign-up-info .btn') }
     }
 }
