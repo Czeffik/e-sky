@@ -10,11 +10,15 @@ class DatePickerModule extends Module {
     }
 
     int getCurrentYear() {
-        return uiDatePickerCalendar.calendarWeeks.first().availableDays.first().getAttribute("data-year") as int
+        int numberOfWeeks = uiDatePickerCalendar.calendarWeeks.size()
+        int numberOfAvailableDaysInLastWeek = uiDatePickerCalendar.calendarWeeks[numberOfWeeks - 1].availableDays.size()
+        return uiDatePickerCalendar.calendarWeeks[numberOfWeeks - 1].availableDays[numberOfAvailableDaysInLastWeek - 1].getAttribute("data-year") as int
     }
 
     int getCurrentMonth() {
-        return uiDatePickerCalendar.calendarWeeks.first().availableDays.first().getAttribute("data-month") as int
+        int numberOfWeeks = uiDatePickerCalendar.calendarWeeks.size()
+        int numberOfAvailableDaysInLastWeek = uiDatePickerCalendar.calendarWeeks[numberOfWeeks - 1].availableDays.size()
+        return uiDatePickerCalendar.calendarWeeks[numberOfWeeks - 1].availableDays[numberOfAvailableDaysInLastWeek - 1].getAttribute("data-month") as int
     }
 
     void selectYear(int year) {
