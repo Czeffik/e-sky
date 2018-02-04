@@ -1,4 +1,4 @@
-package pages
+package pages.hotelsSearch
 
 import geb.Page
 import modules.LoaderModule

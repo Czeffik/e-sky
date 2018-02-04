@@ -4,9 +4,9 @@ import dataProviders.UserDataProvider
 import dataProviders.ValidationMessages
 import geb.spock.GebReportingSpec
 import jodd.util.RandomString
-import pages.FacebookLoginPage
-import pages.LoggedPage
-import pages.LoginViewPage
+import pages.loginAndCreatingAccount.FacebookLoginPage
+
+import pages.loginAndCreatingAccount.LoginViewPage
 import pages.MainPage
 import spock.lang.Shared
 import spock.lang.Unroll
@@ -59,7 +59,7 @@ class LogInSpec extends GebReportingSpec {
         fillFormAndLogIn(user.email, user.password)
 
         then:
-        at LoggedPage
+        at MainPage
     }
 
     def 'Should logged on via facebook button'() {
@@ -84,6 +84,6 @@ class LogInSpec extends GebReportingSpec {
         driver.switchTo().window(winHandleBefore)
 
         then:
-        at LoggedPage
+        at MainPage
     }
 }

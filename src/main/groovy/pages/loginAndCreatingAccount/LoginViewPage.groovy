@@ -1,6 +1,7 @@
-package pages
+package pages.loginAndCreatingAccount
 
 import modules.userZone.LoginModule
+import pages.MainPage
 
 class LoginViewPage extends MainPage {
     static at = {
@@ -26,6 +27,5 @@ class LoginViewPage extends MainPage {
     void fillFormAndLogIn(email, password) {
         fillForm(email, password)
         userZoneModule.form.confirmButton.click()
-        loader.waitForLoggedOn()
     }
 }

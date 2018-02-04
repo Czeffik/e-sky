@@ -10,7 +10,9 @@ import modules.uiDatePicker.DatePickerModule
 
 class MainPage extends Page {
     static url = ''
-    static at = { headerWrapper.logo.logoImg.getAttribute('src') == ImagePathsProvider.logoImage }
+    static at = {
+        driver.getTitle().contains('eSky')
+        headerWrapper.logo.logoImg.getAttribute('src') == ImagePathsProvider.logoImage }
     static content = {
         headerWrapper { module HeaderWrapperModule }
         searchCategory { module SearchCategoryModule }

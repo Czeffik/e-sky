@@ -1,4 +1,4 @@
-package pages
+package pages.loginAndCreatingAccount
 
 import geb.Page
 import modules.LoaderModule

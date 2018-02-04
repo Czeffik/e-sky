@@ -3,7 +3,7 @@ import com.github.javafaker.Internet
 import dataProviders.ValidationMessages
 import geb.spock.GebReportingSpec
 import jodd.util.RandomString
-import pages.CreateAccountPage
+import pages.loginAndCreatingAccount.CreateAccountPage
 import spock.lang.Shared
 import spock.lang.Unroll
 
@@ -20,7 +20,7 @@ class CreateAccountSpec extends GebReportingSpec {
     }
 
     @Unroll
-    def 'Should not create account with email: #email, accept terms: #acceptTerms, because: #validationMessage, #secondValidationMessage'() {
+    def 'Should not create account with email: #email, accept terms: #acceptTerms, because: #validationMessage'() {
         when:
         if (secondPassword != '') {
             createAccountModule.fillFieldsAncClickButton(email, firstPassword, secondPassword, acceptTerms)
@@ -31,7 +31,6 @@ class CreateAccountSpec extends GebReportingSpec {
         then:
         at CreateAccountPage
         validationMessage in createAccountModule.userRegistration.errorMessage.collect { it -> it.text() }
-        createAccountModule.userRegistration.errorMessage.size() == 1
 
         where:
         email                                                                        || firstPassword           || secondPassword   || acceptTerms || validationMessage

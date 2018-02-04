@@ -1,6 +1,6 @@
 import geb.spock.GebReportingSpec
 import pages.MainPage
-import pages.SearchResultPage
+import pages.hotelsSearch.SearchResultPage
 import utils.DateHelper
 
 class SearchHotelsSpec extends GebReportingSpec {
