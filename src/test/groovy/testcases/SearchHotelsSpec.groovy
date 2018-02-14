@@ -1,3 +1,5 @@
+package testcases
+
 import geb.spock.GebReportingSpec
 import pages.MainPage
 import pages.hotelsSearch.SearchResultPage
