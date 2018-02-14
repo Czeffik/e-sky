@@ -45,5 +45,4 @@ class CreateAccountSpec extends GebReportingSpec {
         "${random.randomAlpha(5)}@${random.randomAlpha(5)}.${random.randomAlpha(1)}" || faker.password()        || ''               || true        || msg.invalidEmailCreatingAccount
     }
 
-    //TODO creating account
 }
