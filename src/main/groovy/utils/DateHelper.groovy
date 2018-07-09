@@ -1,9 +1,15 @@
 package utils
 
 class DateHelper {
-    private int currentYear = Calendar.getInstance().get(Calendar.YEAR)
-    private int currentMonth = Calendar.getInstance().get(Calendar.MONTH)
-    private int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    private int currentYear 
+    private int currentMonth 
+    private int currentDay 
+    DateHelper(){
+     currentYear = Calendar.getInstance().get(Calendar.YEAR)
+     currentMonth = Calendar.getInstance().get(Calendar.MONTH)
+     currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    }
+    
 
     int getCurrentYear() {
         return currentYear
